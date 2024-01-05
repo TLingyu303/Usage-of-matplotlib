@@ -82,7 +82,8 @@ plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
 
 方法一：
 
-    多次调用`plot`，例：
+多次调用`plot`，例：
+
     ```python
     >>> plot(x1, y1, 'bo')
     >>> plot(x2, y2, 'go')
@@ -90,19 +91,21 @@ plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
 
 方法二：
 
-    对于二维数组，直接传输数据分别作为`x`, `y`。
-    例：一个数组，第一维作为`x`， 后面的作为`y`。
+对于二维数组，直接传输数据分别作为`x`, `y`。
+例：一个数组，第一维作为`x`， 后面的作为`y`。
+
     ```python
     >>> plot(a[0], a[1:])
     ```
 
 方法三：
 
-    明确指定多组 `[x], y, [fmt]`
+明确指定多组 `[x], y, [fmt]`
+
     ```python
     >>> plot(x1, y1, 'g^', x2, y2, 'g-')
     ```
-    在这种情况下，任何附加的`keyword arguments`均应用于所有的数据集。而且这种语法（即指定多组x,y时）不能与`data`参数一起使用。
+在这种情况下，任何附加的`keyword arguments`均应用于所有的数据集。而且这种语法（即指定多组x,y时）不能与`data`参数一起使用。
 
 默认情况下，每条线都会使用不同的风格，该风格由'style cycle'指定。使用`[fmt]`和`线属性参数`(line property parameters)可以为你的线条指定特定的风格。或者，也可以使用`axex.prop_cycle`rcParam来改变风格循环('style cycle')。
 
