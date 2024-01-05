@@ -25,6 +25,8 @@
 
 # Official Interpretation
 
+## method
+
 (method) def plot(
     self: Self@Axes,
     *args: Any,
@@ -33,54 +35,71 @@
 
 Plot y versus x as lines and/or markers.
 
-Call signatures:
+## Call signatures
 
-    plot([x], y, [fmt], data=None, **kwargs)
-    plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
+Call signatures:
+```python
+plot([x], y, [fmt], data=None, **kwargs)
+plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
+```
 
 The coordinates of the points or line nodes are given by *x*, *y*.
 
 The optional parameter *fmt* is a convenient way for defining basic formatting like color, marker and linestyle. It's a shortcut string notation described in the *Notes* section below.
-
+```python
 >>> plot(x, y)        # plot x and y using default line style and color
 >>> plot(x, y, 'bo')  # plot x and y using blue circle markers
 >>> plot(y)           # plot y using x as index array 0..N-1
 >>> plot(y, 'r+')     # ditto, but with red plusses
+```
 You can use .Line2D properties as keyword arguments for more control on the appearance. Line properties and *fmt* can be mixed. The following two calls yield identical results:
 
+```python
 >>> plot(x, y, 'go--', linewidth=2, markersize=12)
 >>> plot(x, y, color='green', marker='o', linestyle='dashed',
         linewidth=2, markersize=12)
+```
+
 When conflicting with *fmt*, keyword arguments take precedence.
 
-**Plotting labelled data**
+## Plotting labelled data
 
 There's a convenient way for plotting objects with labelled data (i.e. data that can be accessed by index obj['y']). Instead of giving the data in *x* and *y*, you can provide the object in the *data* parameter and just give the labels for *x* and *y*:
-
+```python
 >>> plot('xlabel', 'ylabel', data=obj)
+```
 All indexable objects are supported. This could e.g. be a dict, a pandas.DataFame or a structured numpy array.
 
-**Plotting multiple sets of data**
+## Plotting multiple sets of data
 
 There are various ways to plot multiple sets of data.
 
 The most straight forward way is just to call plot multiple times. Example:
+
+```python
 >>> plot(x1, y1, 'bo')
 >>> plot(x2, y2, 'go')
+```
+
 Alternatively, if your data is already a 2d array, you can pass it directly to *x*, *y*. A separate data set will be drawn for every column.
   Example: an array a where the first column represents the *x* values and the other columns are the *y* columns:
+```python
+>>> plot(a[0], a[1:])
+```
 
-  >>> plot(a[0], a[1:])
 The third way is to specify multiple sets of *[x]*, *y*, *[fmt]* groups:
+```python
   >>> plot(x1, y1, 'g^', x2, y2, 'g-')
-
+```
   In this case, any additional keyword argument applies to all
   datasets. Also this syntax cannot be combined with the *data*
   parameter.
+
 By default, each line is assigned a different style specified by a 'style cycle'. The *fmt* and line property parameters are only necessary if you want explicit deviations from these defaults. Alternatively, you can also change the style cycle using the 'axes.prop_cycle' rcParam.
 
-Parameters
+## Parameters
 x, y : array-like or scalar
+
     The horizontal / vertical coordinates of the data points. *x* values are optional. If not given, they default to [0, ..., N-1].
 
     Commonly, these parameters are arrays of length N. However, scalars are supported as well (equivalent to an array with constant value).
@@ -88,47 +107,54 @@ x, y : array-like or scalar
     The parameters can also be 2-dimensional. Then, the columns represent separate data sets.
 
 fmt : str, optional
+
     A format string, e.g. 'ro' for red circles. See the *Notes* section for a full description of the format strings.
 
     Format strings are just an abbreviation for quickly setting basic line properties. All of these and more can also be controlled by keyword arguments.
 
 data : indexable object, optional
+
     An object with labelled data. If given, provide the label names to plot in *x* and *y*.
 
-Other Parameters
+## Other Parameters
+
 scalex, scaley : bool, optional, default: True
+
     These parameters determined if the view limits are adapted to the data limits. The values are passed on to autoscale_view.
 
 **kwargs : .Line2D properties, optional
-    *kwargs* are used to specify properties like a line label (for auto legends), linewidth, antialiasing, marker face color. Example:
 
+    *kwargs* are used to specify properties like a line label (for auto legends), linewidth, antialiasing, marker face color. Example:
+```python
     >>> plot([1,2,3], [1,2,3], 'go-', label='line 1', linewidth=2)
     >>> plot([1,2,3], [1,4,9], 'rs',  label='line 2')
-
+```
     If you make multiple lines with one plot command, the kwargs
     apply to all those lines.
 
     Here is a list of available `.Line2D` properties:
 
     %(Line2D)s
-Returns
+
+## Returns
+
 lines
     A list of .Line2D objects representing the plotted data.
 
-See Also
+## See Also
 scatter : XY scatter plot with markers of variing size and/or color (
     sometimes also called bubble chart).
 
-Notes
-**Format Strings**
+# Notes
+
+## Format Strings
 
 A format string consists of a part for color, marker and line:
 
     fmt = '[color][marker][line]'
-Each of them is optional. If not provided, the value from the style
-cycle is used. Exception: If line is given, but no marker, the data will be a line without markers.
+Each of them is optional. If not provided, the value from the style cycle is used. Exception: If line is given, but no marker, the data will be a line without markers.
 
-**Colors**
+## Colors
 
 The following color abbreviations are supported:
 
@@ -145,7 +171,7 @@ The following color abbreviations are supported:
 
 If the color is the only part of the format string, you can additionally use any matplotlib.colors spec, e.g. full names ('green') or hex strings ('#008000').
 
-**Markers**
+## Markers
 
 |character |description |
 | ---| --- |
@@ -169,10 +195,10 @@ If the color is the only part of the format string, you can additionally use any
 |'x' |x marker|
 |'D' |diamond marker|
 |'d' |thin_diamond marker|
-|'|' |vline marker|
+|'\|' |vline marker|
 |'_' |hline marker|
 
-**Line Styles**
+## Line Styles
 
 |character |description |
 |---| ---|
@@ -181,7 +207,7 @@ If the color is the only part of the format string, you can additionally use any
 |'-.' |dash-dot line style|
 |':' |dotted line style|
 
-Example format strings:
+## Example format strings:
 
     'b'    # blue markers with default shape
     'ro'   # red circles
