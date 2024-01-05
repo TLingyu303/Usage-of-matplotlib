@@ -80,27 +80,22 @@ plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
 
 ## 绘制多组数据
 
-方法一：
-
-多次调用`plot`，例：
+### 方法一：多次调用`plot`函数
 
     ```python
     >>> plot(x1, y1, 'bo')
     >>> plot(x2, y2, 'go')
     ```
 
-方法二：
+方法二：对于二维数组，直接传输不同维度的数据分别作为`x`, `y`
 
-对于二维数组，直接传输数据分别作为`x`, `y`。
 例：一个数组，第一维作为`x`， 后面的作为`y`。
 
     ```python
     >>> plot(a[0], a[1:])
     ```
 
-方法三：
-
-明确指定多组 `[x], y, [fmt]`
+方法三：明确指定多组数据相应的 `[x], y, [fmt]`
 
     ```python
     >>> plot(x1, y1, 'g^', x2, y2, 'g-')
@@ -213,7 +208,7 @@ plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
 |'x' |x marker|叉号|
 |'D' |diamond marker|方块|
 |'d' |thin_diamond marker|竖菱形|
-|'|' |vline marker|竖线|
+|'\|' |vline marker|竖线|
 |'_' |hline marker|横线|
 
 ### 线的类型
