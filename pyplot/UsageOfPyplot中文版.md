@@ -118,7 +118,7 @@ plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
     个人理解是`x`的每一列与`y`的每一列相对应。
 
     **Note**:***x的第一维和y的第一维必须相同***，例如x.shape=(5,), 则y.shape=(5, n), (n>=1且为整数)；
-    此外，x可以是多维数组，例x.shape=(4, 3), y.shape=(4, 6)![多维x轴](<屏幕截图 2024-01-04 004349.png>)
+    此外，x可以是多维数组，例x.shape=(4, 3), y.shape=(4, 6)![多维x轴](./UseExample.png)
 
 * fmt : str, optional
 
